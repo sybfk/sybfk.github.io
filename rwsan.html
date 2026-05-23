@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>播放器图标</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 背景渐变，模拟原图的紫色渐变 */
+            background: linear-gradient(135deg, #6703fc 0%, #618ef6 50%, #dd9ef6 100%);
+        }
+
+        /* 最外层卡片 */
+        .player-icon {
+            width: 220px;
+            height: 220px;
+            background: linear-gradient(145deg, #840bee, #95d5f5);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 黑色边框层 */
+        .player-frame {
+            width: 160px;
+            height: 160px;
+            background-color: #2b1b2b;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 内部渐变区域 */
+        .player-screen {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, #a117f6, #d5b7e7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 白色圆形按钮 */
+        .play-circle {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 播放三角形 */
+        .play-triangle {
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 30px solid #2b1b2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-icon">
+        <div class="player-frame">
+            <div class="player-screen">
+                <div class="play-circle">
+                    <div class="play-triangle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
