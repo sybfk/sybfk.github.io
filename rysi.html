@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>弹性布局焦点轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,body{
+      height:100%;
+    }
+    /* 轮播容器：铺满整个浏览器窗口 */
+    .banner{
+      width:100vw;
+      height:100vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .banner-img{
+      width:100%;
+      height:auto;
+      max-height: 100vh;
+    }
+    /* 左右箭头按钮图片 */
+    .prev,.next{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:70px;
+      height:70px;
+      cursor:pointer;
+    }
+    .prev{
+      left:40px;
+    }
+    .next{
+      right:40px;
+    }
+    /* 底部圆点弹性排列 */
+    .dot-wrap{
+      position:absolute;
+      bottom:50px;
+      display:flex;
+      gap:15px;
+    }
+    .dot{
+      width:32px;
+      height:32px;
+    }
+  </style>
+</head>
+<body>
+<div class="banner">
+  <!-- 左箭头图片 -->
+  <img class="prev" src="images\arrow1.png" alt="左切换">
+  <!-- 地球日主背景图 -->
+  <img class="banner-img" src="images\banner1.jpg" alt="地球日海报">
+  <!-- 右箭头图片 -->
+  <img class="next" src="images\arrow2.png" alt="右切换">
+
+  <!-- 底部4个圆点图片 -->
+  <div class="dot-wrap">
+    <img class="dot" src="images\树叶m.svg">
+    <img class="dot" src="images\point1.png">
+    <img class="dot" src="images\树叶m.svg">
+    <img class="dot" src="images\point1.png">
+  </div>
+</div>
+</body>
+</html>
