@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>TRAE - 个人方案与定价</title>
+ <style>
+     * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: "Microsoft Yahei", sans-serif;
+         list-style: none;
+         text-decoration: none;
+     }
+    
+     html {
+         background-image: url("xiaoxin.jpg");
+         background-size: cover;
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+     }
+     html, body {
+         color: #fff;
+         min-height: 100vh;
+         overflow-x: hidden;
+         overscroll-behavior: none;
+         background-color: transparent;
+     }
+     body {
+         background-color: rgba(0, 0, 0, 0.35);
+         position: relative;
+     }
+    
+     .drop-water {
+         position: absolute;
+         width: 6px;
+         height: 12px;
+         background: rgba(200, 240, 255, 0.65);
+         border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+         pointer-events: none;
+         z-index: 10;
+     }
+   
+     header {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 12px 30px; /* 左右内边距缩小，整体左移 */
+         background-color: rgba(0, 0, 0, 0.85);
+         border-bottom: 1px solid #1a1a1a;
+         position: sticky;
+         top: 0;
+         z-index: 99;
+     }
+     .nav-left {
+         display: flex;
+         align-items: center;
+         gap: 30px;
+     }
+     .logo {
+         font-size: 22px;
+         font-weight: bold;
+         color: #fff;
+         letter-spacing: 2px;
+     }
+     
+     .logo a {
+         color: #fff;
+     }
+     .nav-links {
+         display: flex;
+         gap: 36px; /* 导航项之间间距拉大 */
+         align-items: center;
+     }
+     .nav-links > li {
+         position: relative;
+         display: flex;
+         align-items: center;
+         gap: 6px;
+         color: #cccccc;
+         font-size: 15px;
+         cursor: pointer;
+         transition: color 0.2s ease;
+     }
+     /* 最后一项知识库 增加右侧外边距，远离登录按钮 */
+     .nav-links > li:last-child {
+         margin-right: 60px;
+     }
+     .nav-links > li a {
+         color: inherit;
+     }
+     .nav-links > li:hover {
+         color: #39e069;
+     }
+     .xia-la-jian {
+         font-size: 10px;
+     }
+     /* 产品下拉菜单，和首页代码保持一致 */
+     .xiala-caidan {
+         position: absolute;
+         top: 28px;
+         left: 0;
+         width: 240px;
+         background-color: rgba(17, 17, 17, 0.9);
+         padding: 12px 16px;
+         display: none;
+         border-radius: 4px;
+         box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+         border: 1px solid #222;
+     }
+     .xiala-xiang {
+         display: flex;
+         align-items: flex-start;
+         justify-content: space-between;
+         padding: 9px 6px;
+         color: #ccc;
+         border-radius: 3px;
+         gap: 10px;
+     }
+     .xiang-wenzi-quyu {
+         display: flex;
+         flex-direction: column;
+         gap: 4px;
+     }
+     .xiang-da-wenzi {
+         font-size: 14px;
+     }
+     .xiang-xiao-wenzi {
+         font-size: 12px;
+         color: #888;
+     }
+     .xiang-tubiao {
+         width: 20px;
+         height: 20px;
+         margin-top: 2px;
+         border: 1px solid #444;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: #777;
+         flex-shrink: 0;
+     }
+     .xinban-biaoqian {
+         background-color: #39e069;
+         color: #000;
+         font-size: 10px;
+         padding: 1px 5px;
+         border-radius: 2px;
+         flex-shrink: 0;
+     }
+     .xiala-xiang:hover {
+         color: #39e069;
+         background-color: #1c1c1c;
+     }
+     .nav-links > li:hover .xiala-caidan {
+         display: block;
+     }
+     .nav-right {
+         display: flex;
+         gap: 16px;
+         align-items: center;
+     }
+     .btn-login {
+         padding: 8px 20px;
+         background: #222222;
+         border: none;
+         color: #fff;
+         border-radius: 2px;
+         cursor: pointer;
+         font-size: 14px;
+         transition: background-color 0.2s ease;
+     }
+     .btn-login:hover {
+         background-color: #333333;
+     }
+     .btn-download {
+         padding: 8px 20px;
+         background: #39e069;
+         border: none;
+         color: #000;
+         border-radius: 2px;
+         cursor: pointer;
+         font-size: 14px;
+         font-weight: 500;
+         transition: background-color 0.2s ease;
+     }
+     .btn-download:hover {
+         background-color: #2fb857;
+     }
+     
+     .title-wrap {
+         width: fit-content;
+         margin: 60px auto 40px;
+         text-align: center;
+         padding: 20px 60px;
+         background-color: rgba(0,0,0,0.2);
+         border-radius: 6px;
+     }
+     .main-title {
+         font-size: 48px;
+         font-weight: bold;
+         margin-bottom: 12px;
+     }
+     .sub-title {
+         color: #bbbbbb;
+         font-size: 16px;
+     }
+     .sub-title a {
+         color: #39e069;
+         text-decoration: none;
+     }
+    
+     .price-container {
+         max-width: 1400px;
+         margin: 0 auto;
+         padding: 0 20px 60px;
+     }
+     .card-row-top {
+         display: flex;
+         gap: 16px;
+         margin-bottom: 20px;
+     }
+     .price-card {
+         flex: 1;
+         background: rgba(20, 20, 20, 0.85);
+         border: 1px solid #2a2a2a;
+         padding: 28px 24px;
+         border-radius: 4px;
+     }
+     
+     .price-card.active {
+         border-color: #39e069;
+     }
+     .card-tag {
+         text-align: right;
+         font-size: 13px;
+         color: #999;
+         margin-bottom: 8px;
+     }
+     .card-title {
+         font-size: 22px;
+         color: #39e069;
+         font-weight: bold;
+         margin-bottom: 16px;
+     }
+     .price-num {
+         font-size: 36px;
+         font-weight: bold;
+         margin-bottom: 24px;
+     }
+     .price-small {
+         font-size: 16px;
+         color: #999;
+         text-decoration: line-through;
+         margin-left: 8px;
+     }
+     .feature-list {
+         display: flex;
+         flex-direction: column;
+         gap: 12px;
+         margin-bottom: 32px;
+     }
+     .feature-item {
+         display: flex;
+         align-items: center;
+         gap: 8px;
+         color: #ddd;
+         font-size: 15px;
+     }
+     .feature-item::before {
+         content: "✓";
+         color: #39e069;
+     }
+     .card-btn {
+         width: 100%;
+         padding: 12px;
+         border: none;
+         font-size: 16px;
+         border-radius: 2px;
+         cursor: pointer;
+         transition: background-color 0.2s ease;
+     }
+     .btn-dark {
+         background: #252525;
+         color: #fff;
+     }
+     .btn-dark:hover {
+         background-color: #353535;
+     }
+     .btn-green {
+         background: #39e069;
+         color: #000;
+         font-weight: 500;
+     }
+     .btn-green:hover {
+         background-color: #2fb857;
+     }
+     
+     .card-row-bottom {
+         margin-top: 16px;
+     }
+     .full-card {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         background: rgba(20, 20, 20, 0.85);
+         border: 1px solid #2a2a2a;
+         padding: 24px;
+         border-radius: 4px;
+     }
+     .full-left {
+         display: flex;
+         flex-direction: column;
+         gap: 12px;
+     }
+     .express-tag {
+         color: #ffd039;
+         font-weight: bold;
+         font-size: 18px;
+     }
+     .express-tag span {
+         font-size: 12px;
+         background: #332a00;
+         padding: 2px 6px;
+         border-radius: 4px;
+         margin-left: 8px;
+     }
+ </style>
+</head>
+<body>
+    
+ <header>
+     <div class="nav-left">
+         
+         <div class="logo">
+             <a href="./shouye.html">TRAE</a >
+         </div>
+         <ul class="nav-links">
+             <li>
+                 产品
+                 <span class="xia-la-jian">▼</span>
+                 <div class="xiala-caidan">
+                     <div class="xiala-xiang">
+                         <span class="xiang-tubiao">⓵</span>
+                         <div class="xiang-wenzi-quyu">
+                             <div class="xiang-da-wenzi">TRAE Work</div>
+                             <div class="xiang-xiao-wenzi">AI 工作助手</div>
+                         </div>
+                         <span class="xinban-biaoqian">新版</span>
+                     </div>
+                     <div class="xiala-xiang">
+                         <span class="xiang-tubiao">⓶</span>
+                         <div class="xiang-wenzi-quyu">
+                             <div class="xiang-da-wenzi">TRAE IDE</div>
+                             <div class="xiang-xiao-wenzi">AI 原生 IDE</div>
+                         </div>
+                     </div>
+                     <div class="xiala-xiang">
+                         <span class="xiang-tubiao">⓷</span>
+                         <div class="xiang-wenzi-quyu">
+                             <div class="xiang-da-wenzi">TRAE 插件</div>
+                             <div class="xiang-xiao-wenzi">AI 编码助手</div>
+                         </div>
+                     </div>
+                 </div>
+             </li>
+             <li>企业版</li>
+             <li style="color:#39e069;"><a href="./dingjiaye.html">定价</a ></li>
+             <li>文档</li>
+             
+             <li><a href="./gengxinriz.html">更新日志</a ></li>
+             <li>社区</li>
+             <li>知识库</li>
+         </ul>
+     </div>
+     <div class="nav-right">
+         <button class="btn-login">登录</button>
+         <button class="btn-download">下载中心</button>
+     </div>
+ </header>
+ 
+ <div class="title-wrap">
+     <h1 class="main-title">个人方案与定价</h1>
+     <p class="sub-title">企业版选型与咨询，前往<a href=" ">火山引擎</a > ↗</p >
+ </div>
+ 
+ <div class="price-container">
+     <div class="card-row-top">
+         
+         <div class="price-card">
+             <div class="card-title">免费</div>
+             <div class="price-num">¥0</div>
+             <div class="feature-list">
+                 <div class="feature-item">所有功能均可免费使用</div>
+                 <div class="feature-item">支持 2 个云端任务同时执行</div>
+             </div>
+             <button class="card-btn btn-dark">免费使用</button>
+         </div>
+         
+         <div class="price-card active">
+             <div class="card-tag">新用户限时优惠</div>
+             <div class="card-title">速通 Pro</div>
+             <div class="price-num">低至 ¥59<span class="price-small">/月 ¥99</span></div>
+             <div class="feature-list">
+                 <div class="feature-item">每月 100 次免排队速通次数</div>
+                 <div class="feature-item">支持 10 个云端任务同时执行</div>
+             </div>
+             <button class="card-btn btn-green">立即升级</button>
+         </div>
+        
+         <div class="price-card">
+             <div class="card-title">速通 Pro+</div>
+             <div class="price-num">¥239<span class="price-small">/月</span></div>
+             <div class="feature-list">
+                 <div class="feature-item">每月 300 次免排队速通次数</div>
+                 <div class="feature-item">支持 10 个云端任务同时执行</div>
+             </div>
+             <button class="card-btn btn-dark">立即升级</button>
+         </div>
+         
+         <div class="price-card">
+             <div class="card-title">速通 Ultra</div>
+             <div class="price-num">¥699<span class="price-small">/月</span></div>
+             <div class="feature-list">
+                 <div class="feature-item">每月 1000 次免排队速通次数</div>
+                 <div class="feature-item">支持 20 个云端任务同时执行</div>
+                 <div class="feature-item">优先解锁 SOTA 模型</div>
+             </div>
+             <button class="card-btn btn-dark">立即升级</button>
+         </div>
+     </div>
+     
+     <div class="card-row-bottom">
+         <div class="full-card">
+             <div class="full-left">
+                 <div class="express-tag">优速通 Express <span>限量发售</span></div>
+                 <div class="price-num">低至 ¥1399<span class="price-small">/月 ¥1999</span></div>
+             </div>
+             <div class="feature-list">
+                 <div class="feature-item">有效期内无限次免排队速通次数</div>
+                 <div class="feature-item">支持 20 个云端任务同时执行</div>
+                 <div class="feature-item">优先解锁 SOTA 模型</div>
+             </div>
+             <button class="card-btn btn-dark" style="width:160px;">立即升级</button>
+         </div>
+     </div>
+ </div>
+ 
+ <script>
+     let mouseDown = false;
+     let holdTimer = null;
+     
+     function createDrop(x, y) {
+         const drop = document.createElement('div');
+         drop.className = 'drop-water';
+         drop.style.left = x + 'px';
+         drop.style.top = y + 'px';
+         document.body.appendChild(drop);
+        
+         let offsetX = (Math.random() - 0.5) * 30;
+         let offsetY = 0;
+         let opacity = 0.7;
+         const speedY = Math.random() * 2 + 1;
+         const speedX = (Math.random() - 0.5) * 0.8;
+         
+         function animate() {
+             offsetY += speedY;
+             offsetX += speedX;
+             opacity -= 0.015;
+             drop.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+             drop.style.opacity = opacity;
+             if (opacity > 0) {
+                 requestAnimationFrame(animate);
+             } else {
+                 drop.remove();
+             }
+         }
+         animate();
+     }
+     
+     function holdSpawn(x, y) {
+         createDrop(x, y);
+         holdTimer = setTimeout(() => {
+             if (mouseDown) holdSpawn(x, y);
+         }, 40);
+     }
+     
+     document.addEventListener('mousedown', (e) => {
+         mouseDown = true;
+         
+         for (let i = 0; i < 8; i++) createDrop(e.clientX, e.clientY);
+         holdSpawn(e.clientX, e.clientY);
+     });
+    
+     document.addEventListener('mouseup', () => {
+         mouseDown = false;
+         clearTimeout(holdTimer);
+     });
+    
+     document.addEventListener('mousemove', (e) => {
+         createDrop(e.clientX, e.clientY);
+     });
+    
+     document.addEventListener('mouseleave', () => {
+         mouseDown = false;
+         clearTimeout(holdTimer);
+     });
+ </script>
+</body>
+</html>

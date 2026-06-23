@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAE - 更新日志</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+            list-style: none;
+            text-decoration: none;
+        }
+        /* 全局小新背景图配置 */
+        html {
+            background-image: url("xiaoxin.jpg");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        html, body {
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+            background-color: transparent;
+        }
+        body {
+            background-color: rgba(0, 0, 0, 0.35);
+            position: relative;
+        }
+
+        /* 水滴粒子样式 */
+        .drop-water {
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            background: rgba(200, 240, 255, 0.65);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 50px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 340px;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        .logo a {
+            color: #fff;
+        }
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        .nav-links > li {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #cccccc;
+            font-size: 15px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .nav-links > li a {
+            color: inherit;
+        }
+        .nav-links > li:hover {
+            color: #39e069;
+        }
+        .xia-la-jian {
+            font-size: 10px;
+        }
+        
+        .xiala-caidan {
+            position: absolute;
+            top: 28px;
+            left: 0;
+            width: 240px;
+            background-color: rgba(17, 17, 17, 0.9);
+            padding: 12px 16px;
+            display: none;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border: 1px solid #222;
+        }
+        .xiala-xiang {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 9px 6px;
+            color: #ccc;
+            border-radius: 3px;
+            gap: 10px;
+        }
+        .xiang-wenzi-quyu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .xiang-da-wenzi {
+            font-size: 14px;
+        }
+        .xiang-xiao-wenzi {
+            font-size: 12px;
+            color: #888;
+        }
+        .xiang-tubiao {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            flex-shrink: 0;
+        }
+        .xinban-biaoqian {
+            background-color: #39e069;
+            color: #000;
+            font-size: 10px;
+            padding: 1px 5px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        .xiala-xiang:hover {
+            color: #39e069;
+            background-color: #1c1c1c;
+        }
+        .nav-links > li:hover .xiala-caidan {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .btn-login {
+            padding: 8px 20px;
+            background: #222222;
+            border: none;
+            color: #fff;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
+        }
+        .btn-login:hover {
+            background-color: #333333;
+        }
+        .btn-download {
+            padding: 8px 20px;
+            background: #39e069;
+            border: none;
+            color: #000;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+        .btn-download:hover {
+            background-color: #2fb857;
+        }
+
+       
+        .title-block {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .page-sub {
+            font-size: 14px;
+            color: #39e069;
+            margin-bottom: 10px;
+        }
+        .page-title {
+            font-size: 46px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+       
+        .gradient-text {
+            background: linear-gradient(90deg, #39e069, #9affbc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .page-desc {
+            color: #aaa;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        .page-btn {
+            padding: 9px 22px;
+            background: #39e069;
+            color: #000;
+            border-radius: 3px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        
+        .log-wrap {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .log-item {
+            background: rgba(18, 18, 18, 0.85);
+            padding: 22px 26px;
+            /* 作业要求：左侧虚线边框 */
+            border-left: 2px dashed #39e069;
+            border-radius: 0 4px 4px 0;
+        }
+        .log-date {
+            color: #39e069;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .log-content {
+            color: #ddd;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+   
+    <header>
+        <div class="nav-left">
+          
+            <div class="logo">
+                <a href="./shouye.html">TRAE</a >
+            </div>
+            <ul class="nav-links">
+                <li>
+                    产品
+                    <span class="xia-la-jian">▼</span>
+                    <div class="xiala-caidan">
+                        <div class="xiala-xiang">
+                            <span class="xiang-tubiao">⓵</span>
+                            <div class="xiang-wenzi-quyu">
+                                <div class="xiang-da-wenzi">TRAE Work</div>
+                                <div class="xiang-xiao-wenzi">AI 工作助手</div>
+                            </div>
+                            <span class="xinban-biaoqian">新版</span>
+                        </div>
+                        <div class="xiala-xiang">
+                            <span class="xiang-tubiao">⓶</span>
+                            <div class="xiang-wenzi-quyu">
+                                <div class="xiang-da-wenzi">TRAE IDE</div>
+                                <div class="xiang-xiao-wenzi">AI 原生 IDE</div>
+                            </div>
+                        </div>
+                        <div class="xiala-xiang">
+                            <span class="xiang-tubiao">⓷</span>
+                            <div class="xiang-wenzi-quyu">
+                                <div class="xiang-da-wenzi">TRAE 插件</div>
+                                <div class="xiang-xiao-wenzi">AI 编码助手</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>企业版</li>
+                
+                <li><a href="./dingjiaye.html" style="color:#ccc;">定价</a ></li>
+                <li>文档</li>
+                
+                <li style="color:#39e069;">更新日志</li>
+                <li>社区</li>
+                <li>知识库</li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="btn-login">登录</button>
+            <button class="btn-download">下载中心</button>
+        </div>
+    </header>
+
+    
+    <div class="title-block">
+        <div class="page-sub">更新日志</div>
+        <h1 class="page-title">探索 TRAE 的<span class="gradient-text">最新动态</span></h1>
+        <p class="page-desc">随时掌握 TRAE 的变化，了解我们为您带来的新功能与优化</p >
+        <a href="#" class="page-btn">下载记录</a >
+    </div>
+
+    
+    <div class="log-wrap">
+        <div class="log-item">
+            <div class="log-date">2026-06-09 | v3.1.8 TRAE APP</div>
+            <div class="log-content">
+                TRAE APP 支持首页多设备桌面窗口展示；优化后台缓存加载速度；修复离线文档同步卡顿问题。
+            </div>
+        </div>
+        <div class="log-item">
+            <div class="log-date">2026-06-09 | v3.1.6 TRAE WORK</div>
+            <div class="log-content">
+                TRAE WORK 升级为 TRAE Work；TRAE Work 支持企业多账号登录、团队权限管控。
+            </div>
+        </div>
+        <div class="log-item">
+            <div class="log-date">2026-06-04 | v3.1.27 TRAE IDE</div>
+            <div class="log-content">
+                修复了一键线上代码预览弹窗、语法提示丢失问题。
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        let mouseDown = false;
+        let holdTimer = null;
+
+        
+        function createDrop(x, y) {
+            const drop = document.createElement('div');
+            drop.className = 'drop-water';
+            drop.style.left = x + 'px';
+            drop.style.top = y + 'px';
+            document.body.appendChild(drop);
+
+            
+            let offsetX = (Math.random() - 0.5) * 30;
+            let offsetY = 0;
+            let opacity = 0.7;
+            const speedY = Math.random() * 2 + 1;
+            const speedX = (Math.random() - 0.5) * 0.8;
+
+            
+            function animate() {
+                offsetY += speedY;
+                offsetX += speedX;
+                opacity -= 0.015;
+                drop.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                drop.style.opacity = opacity;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    drop.remove();
+                }
+            }
+            animate();
+        }
+
+        
+        function holdSpawn(x, y) {
+            createDrop(x, y);
+            holdTimer = setTimeout(() => {
+                if (mouseDown) holdSpawn(x, y);
+            }, 40);
+        }
+
+       
+        document.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            
+            for (let i = 0; i < 8; i++) createDrop(e.clientX, e.clientY);
+            holdSpawn(e.clientX, e.clientY);
+        });
+
+        
+        document.addEventListener('mouseup', () => {
+            mouseDown = false;
+            clearTimeout(holdTimer);
+        });
+
+        
+        document.addEventListener('mousemove', (e) => {
+            createDrop(e.clientX, e.clientY);
+        });
+
+        
+        document.addEventListener('mouseleave', () => {
+            mouseDown = false;
+            clearTimeout(holdTimer);
+        });
+    </script>
+</body>
+</html>

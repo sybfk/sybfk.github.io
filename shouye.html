@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAE - 智能无限，协作无间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        html {
+            background-image: url("xiaoxin.jpg");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        html, body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+            background-color: transparent;
+        }
+     
+        body {
+            background-color: rgba(0, 0, 0, 0.35);
+            position: relative;
+        }
+
+    
+        .drop-water {
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            background: rgba(200, 240, 255, 0.65);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+    
+        .daohanglan {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 14px 50px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+            border-bottom: 1px solid #1a1a1a;
+        }
+       
+        .daohang-logo {
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .caidan-liebiao {
+            display: flex;
+            gap: 36px;
+        }
+       
+        .caidan-xiang {
+            position: relative;
+            color: #cccccc;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .xia-la-jian {
+            font-size: 10px;
+        }
+        .caidan-xiang:hover {
+            color: #ffffff;
+        }
+        
+        .xiala-caidan {
+            position: absolute;
+            top: 28px;
+            left: 0;
+            width: 240px;
+            background-color: rgba(17, 17, 17, 0.8);
+            padding: 12px 16px;
+            display: none;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border: 1px solid #222;
+        }
+       
+        .xiala-xiang {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 9px 6px;
+            color: #ccc;
+            border-radius: 3px;
+            gap: 10px;
+        }
+        .xiang-wenzi-quyu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .xiang-da-wenzi {
+            font-size: 14px;
+        }
+        .xiang-xiao-wenzi {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .xiang-tubiao {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            flex-shrink: 0;
+        }
+        
+        .xinban-biaoqian {
+            background-color: #22bb66;
+            color: #000;
+            font-size: 10px;
+            padding: 1px 5px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        .xiala-xiang:hover {
+            color: #40e080;
+            background-color: #1c1c1c;
+        }
+        
+        .caidan-xiang:hover .xiala-caidan {
+            display: block;
+        }
+       
+        .anniu-quyu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .denglu-wenzi {
+            color: #ccc;
+            font-size: 14px;
+            padding: 6px 14px;
+            border: 1px solid #333;
+            border-radius: 3px;
+        }
+        .denglu-wenzi:hover {
+            color: #fff;
+            border-color: #555;
+        }
+        .xiazai-anniu {
+            background-color: #22bb66;
+            color: #000;
+            padding: 7px 16px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .xiazai-anniu:hover {
+            background-color: #189952;
+        }
+
+        
+        .zhuye-rongqi {
+            margin-top: 70px;
+            background-color: transparent;
+            min-height: 100vh;
+        }
+
+        
+        .shouping-qu1 {
+            padding: 120px 60px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 40px;
+            background: transparent;
+            min-height: 120vh;
+            width: 100%;
+        }
+        
+        .zuo-wenzi {
+            color: #fff;
+        }
+        .zhu-biaoti {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .fu-biaoti {
+            font-size: 42px;
+            color: #dddddd;
+        }
+       
+        .you-zong-rongqi {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 16px;
+        }
+       
+        .shuoming-wenzi {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            color: #ddd;
+            font-size: 13px;
+        }
+        
+        .you-anniu-quyu {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+        }
+        .lvse-anniu {
+            background: #22bb66;
+            color: #000;
+            padding: 14px 26px;
+            border-radius: 3px;
+            width: 220px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .lvse-anniu:hover {
+            background-color: #189952;
+        }
+        .hui-se-anniu {
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 3px;
+            width: 220px;
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .hui-se-anniu:hover {
+            background-color: #1a1a1a;
+            border-color: #666;
+        }
+        /* 按钮下方白色无下划线链接 */
+        .wangye-ban-lianjie {
+            color: #ffffff;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+        .wangye-ban-lianjie:hover {
+            opacity: 1;
+        }
+
+      
+        .shouping-qu2 {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            background-color: rgba(0,0,0,0.25);
+        }
+        .jianbian-biaoti {
+            font-size: 38px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #40e080, #8affb8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .xiaowenzi-shuoming {
+            color: #bbbbbb;
+            font-size: 14px;
+        }
+
+
+        .shouping-qu3 {
+            padding: 40px 30px 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            background-color: rgba(0,0,0,0.2);
+        }
+        .shipin-rongqi {
+            width: 75%;
+            margin: 0 auto;
+        }
+        video {
+            width: 100%;
+            border-radius: 6px;
+            background: #111;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="daohanglan">
+        <div class="daohang-logo">TRAE</div>
+        <ul class="caidan-liebiao">
+            <li class="caidan-xiang">
+                产品
+                <span class="xia-la-jian">▼</span>
+                <div class="xiala-caidan">
+                    <div class="xiala-xiang">
+                        <span class="xiang-tubiao">⓵</span>
+                        <div class="xiang-wenzi-quyu">
+                            <div class="xiang-da-wenzi">TRAE Work</div>
+                            <div class="xiang-xiao-wenzi">AI 工作助手</div>
+                        </div>
+                        <span class="xinban-biaoqian">新版</span>
+                    </div>
+                    <div class="xiala-xiang">
+                        <span class="xiang-tubiao">⓶</span>
+                        <div class="xiang-wenzi-quyu">
+                            <div class="xiang-da-wenzi">TRAE IDE</div>
+                            <div class="xiang-xiao-wenzi">AI 原生 IDE</div>
+                        </div>
+                    </div>
+                    <div class="xiala-xiang">
+                        <span class="xiang-tubiao">⓷</span>
+                        <div class="xiang-wenzi-quyu">
+                            <div class="xiang-da-wenzi">TRAE 插件</div>
+                            <div class="xiang-xiao-wenzi">AI 编码助手</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="caidan-xiang">企业版</li>
+            
+            <li class="caidan-xiang">
+                <a href="./dingjiaye.html " style="color: inherit;">定价</a >
+            </li>
+            <li class="caidan-xiang">文档</li>
+          
+            <li class="caidan-xiang">
+                <a href="./gengxinriz.html" style="color: inherit;">更新日志</a >
+            </li>
+            <li class="caidan-xiang">社区</li>
+            <li class="caidan-xiang">知识库</li>
+        </ul>
+        <div class="anniu-quyu">
+            
+            <a href="#" class="denglu-wenzi">登录</a >
+            
+            <a href="#" class="xiazai-anniu">下载中心</a >
+        </div>
+    </div>
+
+    <div class="zhuye-rongqi">
+        
+        <div class="shouping-qu1">
+            <div class="zuo-wenzi">
+                <div class="zhu-biaoti">TRAE</div>
+                <div class="fu-biaoti">智能无限，协作无间</div>
+            </div>
+
+            
+            <div class="you-zong-rongqi">
+                
+                <div class="shuoming-wenzi">
+                    <div>TRAE Work: 全新上线的智能工作助手</div>
+                    <div>TRAE IDE: 你的专属 AI 开发工程师</div>
+                </div>
+              
+                <div class="you-anniu-quyu">
+                    <a href="#" class="lvse-anniu">
+                        <span>⧉</span>
+                        下载 TRAE Work
+                    </a >
+                    <a href="#" class="hui-se-anniu">
+                        <span>⧉</span>
+                        下载 TRAE IDE
+                    </a >
+                </div>
+                
+                <a href="./wangye.html" class="wangye-ban-lianjie">TRAE Work 网页版</a >
+            </div>
+        </div>
+
+        <div class="shouping-qu2">
+            <div class="jianbian-biaoti">全新TRAE Work</div>
+            <div class="xiaowenzi-shuoming">桌面端、网页版和移动端全量上线</div>
+            <a href="#" class="lvse-anniu">立即体验 TRAE Work</a >
+        </div>
+
+        <div class="shouping-qu3">
+            <div class="shipin-rongqi">
+                <video src="./China.mp4" controls muted></video>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        let mouseDown = false;
+        let holdTimer = null;
+
+        
+        function createDrop(x, y) {
+            const drop = document.createElement('div');
+            drop.className = 'drop-water';
+            drop.style.left = x + 'px';
+            drop.style.top = y + 'px';
+            document.body.appendChild(drop);
+
+            
+            let offsetX = (Math.random() - 0.5) * 30;
+            let offsetY = 0;
+            let opacity = 0.7;
+            const speedY = Math.random() * 2 + 1;
+            const speedX = (Math.random() - 0.5) * 0.8;
+
+            
+            function animate() {
+                offsetY += speedY;
+                offsetX += speedX;
+                opacity -= 0.015;
+                drop.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                drop.style.opacity = opacity;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    drop.remove();
+                }
+            }
+            animate();
+        }
+
+        
+        function holdSpawn(x, y) {
+            createDrop(x, y);
+            holdTimer = setTimeout(() => {
+                if (mouseDown) holdSpawn(x, y);
+            }, 40);
+        }
+
+        
+        document.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+
+            for (let i = 0; i < 8; i++) createDrop(e.clientX, e.clientY);
+            holdSpawn(e.clientX, e.clientY);
+        });
+
+    
+        document.addEventListener('mouseup', () => {
+            mouseDown = false;
+            clearTimeout(holdTimer);
+        });
+
+       
+        document.addEventListener('mousemove', (e) => {
+            createDrop(e.clientX, e.clientY);
+        });
+
+        
+        document.addEventListener('mouseleave', () => {
+            mouseDown = false;
+            clearTimeout(holdTimer);
+        });
+    </script>
+</body>
+</html>

@@ -1,182 +1,150 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-        <style>
-        * {
+    <style>
+        *{
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            width: 100vw;
-            height: 100vh;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* 从上到下的紫粉星空渐变背景 */
+            background: linear-gradient(180deg, #1a0033 0%, #4b0082 30%, #9932cc 60%, #ffb6c1 100%);
             overflow: hidden;
-            /* 深蓝到浅绿渐变背景 */
-            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 25%, #2d6a8f 50%, #4db8a8 75%, #7dd8b0 100%);
-            position: relative;
-            font-family: 'Courier New', monospace;
-            color: white;
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* 星空背景 */
-        .stars {
+        /* 银河效果，增加星空层次感 */
+        .milky-way {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            filter: blur(20px);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* 星空容器 */
+        .starfield {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            z-index: 2;
         }
 
+        /* 星星样式 */
         .star {
             position: absolute;
-            background: white;
+            background-color: white;
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
+            animation: twinkle 2.5s infinite ease-in-out;
         }
 
+        /* 星光闪烁动画 */
         @keyframes twinkle {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scale(1);
+            0%, 100% { 
+                opacity: 0.2; 
+                transform: scale(0.8); 
             }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
+            50% { 
+                opacity: 1; 
+                transform: scale(1.3); 
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
             }
         }
 
-        /* 文字内容居中 */
-        .content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+        /* 放大的毛玻璃卡片，放在正中间 */
+        .glass-card {
+            position: relative;
             z-index: 10;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 60px 80px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            min-width: 400px;
+            text-align: center;
         }
 
-        .main-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        /* 编号文本样式 */
+        .id-number {
+            color: #7b2cbf;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(123, 44, 191, 0.2);
         }
 
-        .status-info {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            opacity: 0.8;
+        /* 下方文字样式 */
+        .desc-text {
+            color: #5a189a;
+            font-size: 16px;
+            line-height: 1.8;
+            opacity: 0.9;
         }
 
-        /* 底部进度条 */
-        .progress-bar {
-            position: absolute;
-            bottom: 80px;
-            left: 10%;
-            width: 80%;
-            height: 4px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 30%;
-            background: linear-gradient(90deg, #4db8a8, #7dd8b0);
-            border-radius: 2px;
-            animation: flow 3s infinite ease-in-out;
-        }
-
-        @keyframes flow {
-            0%, 100% {
-                width: 30%;
-            }
-            50% {
-                width: 70%;
-            }
-        }
-
-        /* 右下角图标 */
-        .corner-icon {
-            position: absolute;
-            bottom: 60px;
-            right: 60px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .corner-icon::after {
-            content: "♢";
-            color: white;
-            font-size: 1.5rem;
-        }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-    
-    <div class="content">
-        <div class="main-number">25051030301</div>
-        <div class="status-info">
-            <a href="rwyi.html">Claude Code介绍</a>
-            <a href="rwer.html">认真严谨的习惯</a>
-            <br>
-            <a href="rwsan.html">播放器</a>
-            <a href="rysi.html">地球日海报</a>
-            <br>
-            <a href="rwwu.html">网上书城注册</a>
-        </div>
-    </div>
+    <!-- 银河效果 -->
+    <div class="milky-way"></div>
 
-    <div class="progress-bar">
-        <div class="progress-fill"></div>
-    </div>
+    <!-- 星空背景 -->
+    <div class="starfield" id="starfield"></div>
 
-    <div class="corner-icon"></div>
+    <!-- 居中放大的毛玻璃卡片 -->
+    <div class="glass-card">
+        <p class="id-number">25051030303</p>
+        <a href="one.html">Claude Code介绍</a>
+        <a href="two.html">培养认真严谨的习惯</a>
+        <br>
+        <a href="thre.html">播放器</a>
+        <a href="four.html">地球日海报</a>
+        <br>
+        <a href="five.html">第五章书城注册</a>
+        <a href="./big homework/shouye.html">期末大作业</a>
+        <!-- 这里可以继续加你没写上的内容 -->
+        <!-- <p class="desc-text">你要加的其他文字</p> -->
+    </div>
 
     <script>
-        // 生成随机星星
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const starCount = 150;
+        // 动态生成星星
+        const starfield = document.getElementById('starfield');
+        const starCount = 250;
 
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                // 随机位置
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                
-                // 随机大小
-                const size = Math.random() * 3 + 1;
-                
-                // 随机动画延迟
-                const delay = Math.random() * 2;
-                
-                star.style.left = `${x}%`;
-                star.style.top = `${y}%`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.animationDelay = `${delay}s`;
-                
-                starsContainer.appendChild(star);
-            }
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 2.5}s`;
+            star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            
+            starfield.appendChild(star);
         }
-
-        window.onload = createStars;
     </script>
 </body>
 </html>
